@@ -2,7 +2,7 @@ CC = cc
 CFLAGS = -Wall -Werror -Wextra -Iminilibx-linux # -Iminilibx-linux tells the compiler where to look for the mlx.h file
 
 SRC_DIR = src/
-SRCS = 
+SRCS = main.c init.c cleanup.c
 
 SRC = $(addprefix $(SRC_DIR), $(SRCS))
 OBJS = $(SRC:.c=.o)
