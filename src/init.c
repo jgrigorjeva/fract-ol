@@ -6,7 +6,7 @@
 /*   By: jgrigorj <jgrigorj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 22:22:45 by jgrigorj          #+#    #+#             */
-/*   Updated: 2025/02/23 22:33:16 by jgrigorj         ###   ########.fr       */
+/*   Updated: 2025/02/27 18:12:54 by jgrigorj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,8 @@ t_frac	*init_frac(void)
 		return (NULL);
 	frac->mlx_ptr = NULL;
 	frac->win_ptr = NULL;
+	frac->frac_type = 0;
+	frac->jul_cim = 0;
+	frac->jul_cre = 0;
 	return (frac);
 }

@@ -6,7 +6,7 @@
 /*   By: jgrigorj <jgrigorj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 20:44:55 by jgrigorj          #+#    #+#             */
-/*   Updated: 2025/02/24 23:32:15 by jgrigorj         ###   ########.fr       */
+/*   Updated: 2025/02/26 22:51:04 by jgrigorj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	main(void)
 	frac = init_frac();
 	if (!frac)
 		return (1);
+	choose_frac(frac);
 	frac->mlx_ptr = mlx_init();
 	if (frac->mlx_ptr == NULL)
 		return (1);
@@ -48,6 +49,7 @@ int	main(void)
 	}
 	// exit_fractal(frac);
     /* Setup hooks */ 
+	mlx_hook(frac->win_ptr, 17, 0, &exit_fractal, frac);
 	mlx_loop_hook(frac->mlx_ptr, &handle_no_event, frac);
 	mlx_key_hook(frac->win_ptr, &handle_input, frac);
 

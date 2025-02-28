@@ -6,7 +6,7 @@
 /*   By: jgrigorj <jgrigorj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:00:31 by jgrigorj          #+#    #+#             */
-/*   Updated: 2025/02/24 20:24:44 by jgrigorj         ###   ########.fr       */
+/*   Updated: 2025/02/28 00:32:15 by jgrigorj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,19 @@ typedef struct s_frac
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
+	int		frac_type;
+	double	jul_cre;
+	double	jul_cim;
 }	t_frac;
 
 // init
 t_frac	*init_frac(void);
 
 // cleanup
-void	exit_fractal(t_frac *frac);
+int		exit_fractal(t_frac *frac);
+
+// input handling
+int	choose_frac(t_frac *frac);
 
 // typedef enum e_bool
 // {
