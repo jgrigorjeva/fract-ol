@@ -6,18 +6,20 @@
 /*   By: jgrigorj <jgrigorj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 22:29:10 by jgrigorj          #+#    #+#             */
-/*   Updated: 2025/02/28 00:59:57 by jgrigorj         ###   ########.fr       */
+/*   Updated: 2025/02/28 01:08:46 by jgrigorj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
 int	get_jul_cpart(t_frac *frac, char *text, char s)
 {
 	char	*input;
 
 	ft_printf("Enter the %s part Re(c)\n", text);
 	input = get_next_line(0);
-	if ((ft_atof(input) == 0 && !(input[0] == '0' || input[0] == '+' || input[0] == '-')))
+	if ((ft_atof(input) == 0 && !(input[0] == '0' || \
+		input[0] == '+' || input[0] == '-')))
 	{
 		ft_printf("The parameter is invalid. Exiting program.\n");
 		free (input);
