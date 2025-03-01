@@ -6,7 +6,7 @@
 /*   By: jgrigorj <jgrigorj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:00:31 by jgrigorj          #+#    #+#             */
-/*   Updated: 2025/02/28 01:09:07 by jgrigorj         ###   ########.fr       */
+/*   Updated: 2025/03/01 23:13:17 by jgrigorj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,28 @@
 # include <string.h>
 # include <X11/keysym.h>
 
-# define WINDOW_WIDTH 600
-# define WINDOW_HEIGHT 300
+// # define WINDOW_WIDTH 600
+// # define WINDOW_HEIGHT 300
 
 typedef struct s_frac
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
+	void	*img_ptr;
 	int		frac_type;
 	double	jul_cre;
 	double	jul_cim;
+	int		width;
+	int		height;
+	int		num_colors;
 }	t_frac;
+
+typedef struct s_color
+{
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+}	t_color;
 
 // init
 t_frac	*init_frac(void);
@@ -42,6 +53,12 @@ int		exit_fractal(t_frac *frac);
 
 // input handling
 int		choose_frac(t_frac *frac);
+
+// utils
+void	put_pixel_to_img(t_frac *frac, int x, int y, int color);
+
+// colors
+unsigned int	float_to_argb(float value, float min, float max, t_frac *frac);
 
 // typedef enum e_bool
 // {
