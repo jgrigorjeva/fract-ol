@@ -6,7 +6,7 @@
 /*   By: jgrigorj <jgrigorj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 20:44:55 by jgrigorj          #+#    #+#             */
-/*   Updated: 2025/03/01 23:14:51 by jgrigorj         ###   ########.fr       */
+/*   Updated: 2025/03/04 22:08:50 by jgrigorj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,38 @@
 
 int	draw_fractal(t_frac *frac)
 {
-	int	i;
+	int	x;
+	int	y;
 
-	i = -1;
-	while (++i < 200)
-		put_pixel_to_img(frac, i, 10, float_to_argb(i, 0, 200, frac));
+	x = -1;
+	while (++x < frac->width)
+	{
+		y = -1;
+		while (++y < frac->height)
+			calc_mandel(frac, x, y);
+	}
 	mlx_put_image_to_window(frac->mlx_ptr, frac->win_ptr, frac->img_ptr, 0, 0);
+	ft_printf("draw\n");
+	return (0);
+}
+
+int	draw_fractal_part(t_frac *frac, int old_width, int old_height)
+{
+	int	x;
+	int	y;
+
+	x = -1;
+	while (++x < frac->width)
+	{
+		y = -1;
+		while (++y < frac->height)
+		{
+			if (x >= old_width || y >= old_height)
+				calc_mandel(frac, x, y);
+		}
+	}
+	mlx_put_image_to_window(frac->mlx_ptr, frac->win_ptr, frac->img_ptr, 0, 0);
+	ft_printf("draw\n");
 	return (0);
 }
 
@@ -57,11 +83,17 @@ int	main(void)
 		exit_fractal(frac);
 		return (1);
 	}
-	// exit_fractal(frac);
-    /* Setup hooks */ 
+
+	
 	mlx_hook(frac->win_ptr, 17, 0, &exit_fractal, frac);
-	// mlx_loop_hook(frac->mlx_ptr, &draw_fractal, frac);
 	mlx_key_hook(frac->win_ptr, &handle_input, frac);
+	mlx_hook(frac->win_ptr, 4, 1L << 2, &mouse_press, frac);
+	mlx_hook(frac->win_ptr, 5, 1L << 3, &mouse_release, frac);
+	mlx_hook(frac->win_ptr, 6, 1L << 6, &mouse_move, frac);
+	mlx_mouse_hook(frac->win_ptr, &mouse_zoom, frac);
+
+	// Draw fractal initially
 	draw_fractal(frac);
+
 	mlx_loop(frac->mlx_ptr);
 }

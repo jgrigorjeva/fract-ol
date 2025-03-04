@@ -2,7 +2,8 @@ CC = cc
 CFLAGS = -Wall -Werror -Wextra -Iminilibx-linux # -Iminilibx-linux tells the compiler where to look for the mlx.h file
 
 SRC_DIR = src/
-SRCS = main.c init.c cleanup.c input_reading.c utils.c color.c
+SRCS = main.c init.c cleanup.c input_reading.c utils.c color.c mouse.c calculate_fractal.c \
+		zoom.c
 
 SRC = $(addprefix $(SRC_DIR), $(SRCS))
 OBJS = $(SRC:.c=.o)
@@ -18,7 +19,7 @@ all: $(NAME)
 
 # Build the fractol program
 $(NAME): $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX_DIR)/libmlx.a -lXext -lX11 -lbsd -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX_DIR)/libmlx.a -lXext -lX11 -lbsd -lm -o $(NAME)
 
 
 # Rule to compile .o files from .c files
