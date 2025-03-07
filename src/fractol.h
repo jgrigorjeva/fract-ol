@@ -6,7 +6,7 @@
 /*   By: jgrigorj <jgrigorj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:00:31 by jgrigorj          #+#    #+#             */
-/*   Updated: 2025/03/07 15:44:32 by jgrigorj         ###   ########.fr       */
+/*   Updated: 2025/03/07 22:39:01 by jgrigorj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_frac
 	void	*mlx_ptr;
 	void	*win_ptr;
 	void	*img_ptr;
+	void	*panel_img_ptr;
 	int		bpp;
 	int		line_size;
 	int		endian;
@@ -51,6 +52,7 @@ typedef struct s_frac
 	double	jul_cim;
 	int		width;
 	int		height;
+	int		panel_height;
 	int		num_colors;
 	int		max_iter;
 	double	x0;
@@ -79,7 +81,10 @@ int				handle_input(int keysym, t_frac *frac);
 
 // utils
 void			put_pixel_to_img(t_frac *frac, int x, int y, int color);
+void			put_pixel_to_panel(t_frac *frac, int x, int y, int color);
 void			copy_image(t_frac *frac, int old_width, int old_height);
+void			draw_panel(t_frac *frac);
+
 
 // colors
 unsigned int	float_to_argb(float value, float min, float max, t_frac *frac);

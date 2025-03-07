@@ -6,7 +6,7 @@
 /*   By: jgrigorj <jgrigorj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 22:22:45 by jgrigorj          #+#    #+#             */
-/*   Updated: 2025/03/07 15:38:31 by jgrigorj         ###   ########.fr       */
+/*   Updated: 2025/03/07 22:05:12 by jgrigorj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_frac	*init_frac(void)
 	frac->mlx_ptr = NULL;
 	frac->win_ptr = NULL;
 	frac->img_ptr = NULL;
+	frac->panel_img_ptr = NULL;
 	frac->resize_dir_x = 0;
 	frac->resize_dir_y = 0;
 	frac->resizing = 0;
@@ -32,6 +33,7 @@ t_frac	*init_frac(void)
 	frac->jul_cre = 0;
 	frac->width = 900;
 	frac->height = 600;
+	frac->panel_height = 50;
 	frac->num_colors = 7;
 	frac->max_iter = 100;
 	frac->scale = 4.0 / frac->width;
