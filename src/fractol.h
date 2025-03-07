@@ -6,7 +6,7 @@
 /*   By: jgrigorj <jgrigorj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:00:31 by jgrigorj          #+#    #+#             */
-/*   Updated: 2025/03/04 18:52:05 by jgrigorj         ###   ########.fr       */
+/*   Updated: 2025/03/07 15:44:32 by jgrigorj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ unsigned int	float_to_argb(float value, float min, float max, t_frac *frac);
 int				draw_fractal(t_frac *frac);
 int				draw_fractal_part(t_frac *frac, int old_width, int old_height);
 void			calc_mandel(t_frac *frac, int px, int py);
+void			calc_julia(t_frac *frac, int px, int py);
 
 // window resizing (mouse input)
 int				is_in_resize_zone(int x, int y, t_frac *frac);

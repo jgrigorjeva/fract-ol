@@ -6,7 +6,7 @@
 /*   By: jgrigorj <jgrigorj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 20:44:55 by jgrigorj          #+#    #+#             */
-/*   Updated: 2025/03/04 22:08:50 by jgrigorj         ###   ########.fr       */
+/*   Updated: 2025/03/07 15:45:26 by jgrigorj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,12 @@ int	draw_fractal(t_frac *frac)
 	{
 		y = -1;
 		while (++y < frac->height)
-			calc_mandel(frac, x, y);
+		{
+			if (frac->frac_type == 1)
+				calc_julia(frac, x, y);
+			if (frac->frac_type == 2)
+				calc_mandel(frac, x, y);
+		}
 	}
 	mlx_put_image_to_window(frac->mlx_ptr, frac->win_ptr, frac->img_ptr, 0, 0);
 	ft_printf("draw\n");
@@ -51,11 +56,23 @@ int	draw_fractal_part(t_frac *frac, int old_width, int old_height)
 
 int	handle_input(int keysym, t_frac *frac)
 {
+	double	move_step;
+
+	move_step = frac->scale * 42;
 	if (keysym == XK_Escape)
 	{
 		exit_fractal(frac);
 		exit (0);
 	}
+	else if (keysym == XK_Left)
+		frac->center_x += move_step;
+	else if (keysym == XK_Right)
+		frac->center_x -= move_step;
+	else if (keysym == XK_Up)
+		frac->center_y += move_step;
+	else if (keysym == XK_Down)
+		frac->center_y -= move_step;
+	draw_fractal(frac);
 	return (0);
 }
 

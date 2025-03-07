@@ -6,7 +6,7 @@
 /*   By: jgrigorj <jgrigorj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 20:21:07 by jgrigorj          #+#    #+#             */
-/*   Updated: 2025/03/04 16:52:18 by jgrigorj         ###   ########.fr       */
+/*   Updated: 2025/03/07 21:46:52 by jgrigorj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,31 @@ void	calc_mandel(t_frac *frac, int px, int py)
 			float_to_argb(i, 0, 100, frac));
 	else
 		put_pixel_to_img(frac, px, py, 0xFF000000);
+}
+
+void	calc_julia(t_frac *frac, int px, int py)
+{
+	int		i;
+	double	x;
+	double	y;
+	double	x_temp;
+	// double	escape_r;
+
+	x = (px - frac->width / 2.0) * frac->scale + frac->center_x;
+	y = (py - frac->height / 2.0) * frac->scale + frac->center_y;
+	i = -1;
+	// escape_r = 
+	while (x * x + y * y <= __DBL_MAX__ && ++i < frac->max_iter)
+	{
+		x_temp = x * x - y * y + frac->jul_cre;
+		y = 2 * x * y + frac->jul_cim;
+		x = x_temp;
+	}
+	// if (py == frac->height / 2)
+	// 	ft_printf("%i, ");
+	if (i == frac->max_iter)
+		put_pixel_to_img(frac, px, py, 0xFF000000);
+	else
+		put_pixel_to_img(frac, px, py, \
+			float_to_argb(i, 0, frac->max_iter, frac));
 }
