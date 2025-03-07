@@ -6,7 +6,7 @@
 /*   By: jgrigorj <jgrigorj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 20:44:55 by jgrigorj          #+#    #+#             */
-/*   Updated: 2025/03/08 00:01:19 by jgrigorj         ###   ########.fr       */
+/*   Updated: 2025/03/08 00:24:29 by jgrigorj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	draw_fractal(t_frac *frac)
 				calc_julia(frac, x, y);
 			if (frac->frac_type == 2)
 				calc_mandel(frac, x, y);
+			if (frac->frac_type == 3)
+				calc_ship(frac, x, y);
 		}
 	}
 	mlx_put_image_to_window(frac->mlx_ptr, frac->win_ptr, frac->img_ptr, 0, 0);
@@ -90,13 +92,13 @@ int	handle_input(int keysym, t_frac *frac)
 	else if (keysym == XK_h)
 		frac->jul_cim -= 0.001;
 	else if (keysym == XK_Left)
-		frac->center_x += move_step;
-	else if (keysym == XK_Right)
 		frac->center_x -= move_step;
+	else if (keysym == XK_Right)
+		frac->center_x += move_step;
 	else if (keysym == XK_Up)
-		frac->center_y += move_step;
-	else if (keysym == XK_Down)
 		frac->center_y -= move_step;
+	else if (keysym == XK_Down)
+		frac->center_y += move_step;
 	draw_fractal(frac);
 	return (0);
 }
@@ -113,7 +115,7 @@ int	main(void)
 	if (frac->mlx_ptr == NULL)
 		return (1);
 	frac->win_ptr = mlx_new_window(frac->mlx_ptr, frac->width,
-			frac->height, "My first window!");
+			frac->height, "Let's explore some fractals!");
 	if (frac->win_ptr == NULL)
 	{
 		exit_fractal(frac);
