@@ -6,7 +6,7 @@
 /*   By: jgrigorj <jgrigorj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 20:44:55 by jgrigorj          #+#    #+#             */
-/*   Updated: 2025/03/08 00:24:29 by jgrigorj         ###   ########.fr       */
+/*   Updated: 2025/03/09 23:36:39 by jgrigorj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,12 @@ int	draw_fractal_part(t_frac *frac, int old_width, int old_height)
 	return (0);
 }
 
+int	handle_expose(t_frac *frac)
+{
+	draw_fractal(frac);
+	return (0);
+}
+
 int	handle_input(int keysym, t_frac *frac)
 {
 	double	move_step;
@@ -99,6 +105,14 @@ int	handle_input(int keysym, t_frac *frac)
 		frac->center_y -= move_step;
 	else if (keysym == XK_Down)
 		frac->center_y += move_step;
+	else if (keysym == XK_c)
+		switch_colors(frac);
+	else if (keysym == XK_1)
+		frac->frac_type = 1;
+	else if (keysym == XK_2)
+		frac->frac_type = 2;
+	else if (keysym == XK_3)
+		frac->frac_type = 3;
 	draw_fractal(frac);
 	return (0);
 }
@@ -138,10 +152,11 @@ int	main(void)
 	
 	mlx_hook(frac->win_ptr, 17, 0, &exit_fractal, frac);
 	mlx_key_hook(frac->win_ptr, &handle_input, frac);
-	mlx_hook(frac->win_ptr, 4, 1L << 2, &mouse_press, frac);
-	mlx_hook(frac->win_ptr, 5, 1L << 3, &mouse_release, frac);
-	mlx_hook(frac->win_ptr, 6, 1L << 6, &mouse_move, frac);
+	mlx_hook(frac->win_ptr, 4, ButtonPressMask, &mouse_press, frac);
+	mlx_hook(frac->win_ptr, 5, ButtonReleaseMask, &mouse_release, frac);
+	mlx_hook(frac->win_ptr, 6, PointerMotionMask, &mouse_move, frac);
 	mlx_mouse_hook(frac->win_ptr, &mouse_zoom, frac);
+	mlx_hook(frac->win_ptr, 12, (1L << 15), &handle_expose, frac);
 
 	// Draw fractal initially
 	draw_fractal(frac);

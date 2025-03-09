@@ -6,11 +6,19 @@
 /*   By: jgrigorj <jgrigorj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 22:09:37 by jgrigorj          #+#    #+#             */
-/*   Updated: 2025/03/03 22:46:18 by jgrigorj         ###   ########.fr       */
+/*   Updated: 2025/03/09 22:54:43 by jgrigorj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+void	switch_colors(t_frac *frac)
+{
+	if (frac->color_switch == 2)
+		frac->color_switch = 0;
+	else
+		frac->color_switch++;
+}
 
 t_color	interpolate_color(t_color start, t_color end, float t)
 {
@@ -22,22 +30,14 @@ t_color	interpolate_color(t_color start, t_color end, float t)
 	return (result);
 }
 
-// colors[0] = (t_color){255, 0, 0};    // Red
-// colors[1] = (t_color){255, 127, 0};  // Orange
-// colors[2] = (t_color){255, 255, 0};  // Yellow
-// colors[3] = (t_color){0, 255, 0};    // Green
-// colors[4] = (t_color){0, 255, 255};  // Cyan
-// colors[5] = (t_color){0, 0, 255};    // Blue
-// colors[6] = (t_color){128, 0, 128};  // Purple
-void	define_colors(t_color *colors)
+void	define_colors(t_color *colors, t_frac *frac)
 {
-	colors[0] = (t_color){255, 0, 0};
-	colors[1] = (t_color){255, 127, 0};
-	colors[2] = (t_color){255, 255, 0};
-	colors[3] = (t_color){0, 255, 0};
-	colors[4] = (t_color){0, 255, 255};
-	colors[5] = (t_color){0, 0, 255};
-	colors[6] = (t_color){128, 0, 128};
+	if (frac->color_switch == 0)
+		define_col_rainbow(colors);
+	if (frac->color_switch == 1)
+		define_col_heatmap(colors);
+	if (frac->color_switch == 2)
+		define_col_ocean(colors);
 }
 
 // The pow(normalized, 3) expression changes the distribution from linear to exponential
@@ -49,7 +49,7 @@ t_color	get_gradient_color(float normalized, t_color *colors, t_frac *frac)
 	t_color	start_color;
 	t_color	end_color;
 
-	section = pow(normalized, 3) * (frac->num_colors - 1);
+	section = pow(normalized, 2) * (frac->num_colors - 1);
 	color_index = (int)section;
 	t = section - color_index;
 	start_color = colors[color_index];
@@ -69,7 +69,7 @@ unsigned int	float_to_argb(float value, float min, float max, t_frac *frac)
 	t_color	colors[7];
 	t_color	final_color;
 
-	define_colors(colors);
+	define_colors(colors, frac);
 	if (value < min)
 		return (0xFFFFFFFF);
 	if (value > max)

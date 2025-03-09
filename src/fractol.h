@@ -6,7 +6,7 @@
 /*   By: jgrigorj <jgrigorj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:00:31 by jgrigorj          #+#    #+#             */
-/*   Updated: 2025/03/08 00:16:40 by jgrigorj         ###   ########.fr       */
+/*   Updated: 2025/03/09 23:26:50 by jgrigorj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <stdio.h>
 # include <string.h>
 # include <X11/keysym.h>
+# include <X11/X.h>
 # include <math.h>
 
 
@@ -42,6 +43,7 @@ typedef struct s_frac
 	int		bpp;
 	int		line_size;
 	int		endian;
+	int		color_switch;
 	int		drag_start_x;
 	int		drag_start_y;
 	int		resizing;
@@ -88,6 +90,10 @@ void			draw_panel(t_frac *frac);
 
 // colors
 unsigned int	float_to_argb(float value, float min, float max, t_frac *frac);
+void			switch_colors(t_frac *frac);
+void			define_col_rainbow(t_color *colors);
+void			define_col_heatmap(t_color *colors);
+void			define_col_ocean(t_color *colors);
 
 // fractal
 int				draw_fractal(t_frac *frac);
