@@ -6,7 +6,7 @@
 /*   By: jgrigorj <jgrigorj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:00:31 by jgrigorj          #+#    #+#             */
-/*   Updated: 2025/03/09 23:26:50 by jgrigorj         ###   ########.fr       */
+/*   Updated: 2025/03/09 23:49:13 by jgrigorj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ int				mouse_press(int button, int x, int y, t_frac *frac);
 int				mouse_release(int button, int x, int y, t_frac *frac);
 int				mouse_move(int x, int y, t_frac *frac);
 void			resize_window(t_frac *frac, int new_width, int new_height);
+int				handle_resize(t_frac *frac);
 
 // zooming
 int				mouse_zoom(int mouse_code, int x, int y, t_frac *frac);

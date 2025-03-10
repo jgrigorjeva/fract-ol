@@ -6,7 +6,7 @@
 /*   By: jgrigorj <jgrigorj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 22:36:43 by jgrigorj          #+#    #+#             */
-/*   Updated: 2025/03/04 22:08:58 by jgrigorj         ###   ########.fr       */
+/*   Updated: 2025/03/10 00:06:05 by jgrigorj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,4 +128,32 @@ void	resize_window(t_frac *frac, int new_width, int new_height)
 	mlx_mouse_hook(frac->win_ptr, &mouse_zoom, frac); // Zooming
 	ft_printf("resizing\n");
 	draw_fractal(frac);
+}
+
+int handle_resize(t_frac *frac)
+{
+    int new_width;
+    int new_height;
+
+    mlx_get_screen_size(frac->mlx_ptr, &new_width, &new_height);  // Get new size
+
+    // Only update if size changed
+    if (new_width != frac->width || new_height != frac->height)
+    {
+        frac->width = new_width;
+        frac->height = new_height;
+        
+        // Destroy old image
+        mlx_destroy_image(frac->mlx_ptr, frac->img_ptr);
+		mlx_destroy_image(frac->mlx_ptr, frac->panel_img_ptr);
+        
+        // Create new image with updated size
+        frac->img_ptr = mlx_new_image(frac->mlx_ptr, frac->width, frac->height);
+        frac->panel_img_ptr = mlx_new_image(frac->mlx_ptr, frac->width, frac->panel_height);
+        // Redraw the fractal
+        draw_fractal(frac);
+		mlx_put_image_to_window(frac->mlx_ptr, frac->win_ptr, frac->img_ptr, 0, 0);
+		draw_panel(frac);
+    }
+    return (0);
 }

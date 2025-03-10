@@ -6,7 +6,7 @@
 /*   By: jgrigorj <jgrigorj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 20:44:55 by jgrigorj          #+#    #+#             */
-/*   Updated: 2025/03/09 23:36:39 by jgrigorj         ###   ########.fr       */
+/*   Updated: 2025/03/10 00:07:18 by jgrigorj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	draw_fractal_part(t_frac *frac, int old_width, int old_height)
 int	handle_expose(t_frac *frac)
 {
 	draw_fractal(frac);
+	draw_panel(frac);
 	return (0);
 }
 
@@ -152,11 +153,12 @@ int	main(void)
 	
 	mlx_hook(frac->win_ptr, 17, 0, &exit_fractal, frac);
 	mlx_key_hook(frac->win_ptr, &handle_input, frac);
-	mlx_hook(frac->win_ptr, 4, ButtonPressMask, &mouse_press, frac);
-	mlx_hook(frac->win_ptr, 5, ButtonReleaseMask, &mouse_release, frac);
-	mlx_hook(frac->win_ptr, 6, PointerMotionMask, &mouse_move, frac);
+	// mlx_hook(frac->win_ptr, 4, ButtonPressMask, &mouse_press, frac);
+	// mlx_hook(frac->win_ptr, 5, ButtonReleaseMask, &mouse_release, frac);
+	// mlx_hook(frac->win_ptr, 6, PointerMotionMask, &mouse_move, frac);
 	mlx_mouse_hook(frac->win_ptr, &mouse_zoom, frac);
 	mlx_hook(frac->win_ptr, 12, (1L << 15), &handle_expose, frac);
+	mlx_hook(frac->win_ptr,  ConfigureNotify, (1L << 16), &handle_resize, frac);
 
 	// Draw fractal initially
 	draw_fractal(frac);
