@@ -6,7 +6,7 @@
 /*   By: jgrigorj <jgrigorj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 22:29:10 by jgrigorj          #+#    #+#             */
-/*   Updated: 2025/02/28 01:08:46 by jgrigorj         ###   ########.fr       */
+/*   Updated: 2025/03/10 16:08:55 by jgrigorj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ int	get_julia_param(t_frac *frac)
 {
 	ft_printf("Please, specify the c constant: c = Re(c) + i*Im(c)\n");
 	if (get_jul_cpart(frac, "real", 'r') == 1)
-		return (1);
+		ft_printf("The parameter is invalid, let's try 0.355 instead\n");
 	if (get_jul_cpart(frac, "imaginary", 'i') == 1)
-		return (1);
+		ft_printf("The parameter is invalid, let's try 0.355 instead\n");
 	return (0);
 }
 
@@ -54,7 +54,7 @@ int	choose_frac(t_frac *frac)
 	if ((ft_atoi(input) < 1 || ft_atoi(input) > 3))
 	{
 		ft_printf("No valid parameters provided (1 for Julia, 2 for Mandelbrot, \
-			3 for Burning ship). Exiting program.\n");
+			3 for Burning ship).\n Exiting program.\n");
 		free (input);
 		free (frac);
 		exit (1);

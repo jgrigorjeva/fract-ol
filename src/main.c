@@ -6,7 +6,7 @@
 /*   By: jgrigorj <jgrigorj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 20:44:55 by jgrigorj          #+#    #+#             */
-/*   Updated: 2025/03/10 00:07:18 by jgrigorj         ###   ########.fr       */
+/*   Updated: 2025/03/10 23:04:33 by jgrigorj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,26 +33,6 @@ int	draw_fractal(t_frac *frac)
 	}
 	mlx_put_image_to_window(frac->mlx_ptr, frac->win_ptr, frac->img_ptr, 0, 0);
 	draw_panel(frac);
-	ft_printf("draw\n");
-	return (0);
-}
-
-int	draw_fractal_part(t_frac *frac, int old_width, int old_height)
-{
-	int	x;
-	int	y;
-
-	x = -1;
-	while (++x < frac->width)
-	{
-		y = -1;
-		while (++y < frac->height)
-		{
-			if (x >= old_width || y >= old_height)
-				calc_mandel(frac, x, y);
-		}
-	}
-	mlx_put_image_to_window(frac->mlx_ptr, frac->win_ptr, frac->img_ptr, 0, 0);
 	ft_printf("draw\n");
 	return (0);
 }
@@ -114,6 +94,10 @@ int	handle_input(int keysym, t_frac *frac)
 		frac->frac_type = 2;
 	else if (keysym == XK_3)
 		frac->frac_type = 3;
+	else if (keysym == XK_9)
+		frac->max_iter += 50;
+	else if (keysym == XK_0 && frac->max_iter > 50)
+		frac->max_iter -= 50;
 	draw_fractal(frac);
 	return (0);
 }
@@ -149,19 +133,10 @@ int	main(void)
 		exit_fractal(frac);
 		return (1);
 	}
-
-	
 	mlx_hook(frac->win_ptr, 17, 0, &exit_fractal, frac);
 	mlx_key_hook(frac->win_ptr, &handle_input, frac);
-	// mlx_hook(frac->win_ptr, 4, ButtonPressMask, &mouse_press, frac);
-	// mlx_hook(frac->win_ptr, 5, ButtonReleaseMask, &mouse_release, frac);
-	// mlx_hook(frac->win_ptr, 6, PointerMotionMask, &mouse_move, frac);
 	mlx_mouse_hook(frac->win_ptr, &mouse_zoom, frac);
 	mlx_hook(frac->win_ptr, 12, (1L << 15), &handle_expose, frac);
-	mlx_hook(frac->win_ptr,  ConfigureNotify, (1L << 16), &handle_resize, frac);
-
-	// Draw fractal initially
 	draw_fractal(frac);
-
 	mlx_loop(frac->mlx_ptr);
 }

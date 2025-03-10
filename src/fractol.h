@@ -6,7 +6,7 @@
 /*   By: jgrigorj <jgrigorj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:00:31 by jgrigorj          #+#    #+#             */
-/*   Updated: 2025/03/09 23:49:13 by jgrigorj         ###   ########.fr       */
+/*   Updated: 2025/03/10 16:05:44 by jgrigorj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,7 @@
 # include <stdio.h>
 # include <string.h>
 # include <X11/keysym.h>
-# include <X11/X.h>
 # include <math.h>
-
-
-// # define WINDOW_WIDTH 600
-// # define WINDOW_HEIGHT 300
-// Distance from the edge where resizing is allowed
-#define EDGE_THRESHOLD 50
 
 // Varibles	center_x, center_y represent the center of the visible area
 //  in the complex plane (i. e. in the fractal coordinates).
@@ -44,11 +37,6 @@ typedef struct s_frac
 	int		line_size;
 	int		endian;
 	int		color_switch;
-	int		drag_start_x;
-	int		drag_start_y;
-	int		resizing;
-	int		resize_dir_x;
-	int		resize_dir_y;
 	int		frac_type;
 	double	jul_cre;
 	double	jul_cim;
@@ -84,7 +72,6 @@ int				handle_input(int keysym, t_frac *frac);
 // utils
 void			put_pixel_to_img(t_frac *frac, int x, int y, int color);
 void			put_pixel_to_panel(t_frac *frac, int x, int y, int color);
-void			copy_image(t_frac *frac, int old_width, int old_height);
 void			draw_panel(t_frac *frac);
 
 
@@ -97,18 +84,9 @@ void			define_col_ocean(t_color *colors);
 
 // fractal
 int				draw_fractal(t_frac *frac);
-int				draw_fractal_part(t_frac *frac, int old_width, int old_height);
 void			calc_mandel(t_frac *frac, int px, int py);
 void			calc_julia(t_frac *frac, int px, int py);
 void			calc_ship(t_frac *frac, int px, int py);
-
-// window resizing (mouse input)
-int				is_in_resize_zone(int x, int y, t_frac *frac);
-int				mouse_press(int button, int x, int y, t_frac *frac);
-int				mouse_release(int button, int x, int y, t_frac *frac);
-int				mouse_move(int x, int y, t_frac *frac);
-void			resize_window(t_frac *frac, int new_width, int new_height);
-int				handle_resize(t_frac *frac);
 
 // zooming
 int				mouse_zoom(int mouse_code, int x, int y, t_frac *frac);
