@@ -6,7 +6,7 @@
 /*   By: jgrigorj <jgrigorj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:00:31 by jgrigorj          #+#    #+#             */
-/*   Updated: 2025/03/09 23:49:13 by jgrigorj         ###   ########.fr       */
+/*   Updated: 2025/03/10 15:18:39 by jgrigorj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
 # include <X11/keysym.h>
 # include <X11/X.h>
 # include <math.h>
-
+// maybe forbidden
+# include <X11/Xlib.h>
 
 // # define WINDOW_WIDTH 600
 // # define WINDOW_HEIGHT 300
@@ -108,7 +109,9 @@ int				mouse_press(int button, int x, int y, t_frac *frac);
 int				mouse_release(int button, int x, int y, t_frac *frac);
 int				mouse_move(int x, int y, t_frac *frac);
 void			resize_window(t_frac *frac, int new_width, int new_height);
-int				handle_resize(t_frac *frac);
+// int				handle_resize(t_frac *frac);
+int handle_resize(int event, void *param);
+
 
 // zooming
 int				mouse_zoom(int mouse_code, int x, int y, t_frac *frac);

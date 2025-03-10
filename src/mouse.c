@@ -6,7 +6,7 @@
 /*   By: jgrigorj <jgrigorj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 22:36:43 by jgrigorj          #+#    #+#             */
-/*   Updated: 2025/03/10 00:06:05 by jgrigorj         ###   ########.fr       */
+/*   Updated: 2025/03/10 15:23:22 by jgrigorj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,30 +130,78 @@ void	resize_window(t_frac *frac, int new_width, int new_height)
 	draw_fractal(frac);
 }
 
-int handle_resize(t_frac *frac)
+// int handle_resize(t_frac *frac)
+// {
+//     int new_width;
+//     int new_height;
+
+//     mlx_get_screen_size(frac->mlx_ptr, &new_width, &new_height);  // Get new size
+// 	ft_printf("Resize event detected! New size request: %d x %d\n", new_width, new_height);
+//     // Only update if size changed
+//     if (new_width != frac->width || new_height != frac->height)
+//     {
+//         frac->width = new_width;
+//         frac->height = new_height;
+//         ft_printf("Window resized\n");
+//         // Destroy old image
+//         mlx_destroy_image(frac->mlx_ptr, frac->img_ptr);
+// 		mlx_destroy_image(frac->mlx_ptr, frac->panel_img_ptr);
+        
+//         // Create new image with updated size
+// 		frac->img_ptr = mlx_new_image(frac->mlx_ptr, frac->width, frac->height);
+// 		frac->panel_img_ptr = mlx_new_image(frac->mlx_ptr, frac->width, frac->panel_height);
+// 		if (!frac->panel_img_ptr)
+// 			ft_printf("Error: image panel creation failed\n");
+// 		else
+// 			ft_printf("Panel image successfully created: %dx%d\n", frac->width, frac->panel_height);
+// 		// Redraw the fractal
+//         draw_fractal(frac);
+// 		mlx_put_image_to_window(frac->mlx_ptr, frac->win_ptr, frac->img_ptr, 0, 0);
+// 		draw_panel(frac);
+//     }
+//     return (0);
+// }
+
+int handle_resize(int event, void *param)
 {
-    int new_width;
-    int new_height;
+    t_frac *frac;
+    XWindowAttributes attr;
 
-    mlx_get_screen_size(frac->mlx_ptr, &new_width, &new_height);  // Get new size
+    (void)event;
+    frac = (t_frac *)param;
 
-    // Only update if size changed
+    // Get actual window size from X11
+    XGetWindowAttributes(frac->mlx_ptr->display, frac->win_ptr, &attr);
+
+    int new_width = attr.width;
+    int new_height = attr.height;
+
+    ft_printf("Resize event detected! New size: %d x %d\n", new_width, new_height);
+
     if (new_width != frac->width || new_height != frac->height)
     {
         frac->width = new_width;
         frac->height = new_height;
-        
-        // Destroy old image
+        ft_printf("Window resized\n");
+
+        // Destroy old images
         mlx_destroy_image(frac->mlx_ptr, frac->img_ptr);
-		mlx_destroy_image(frac->mlx_ptr, frac->panel_img_ptr);
-        
-        // Create new image with updated size
+        mlx_destroy_image(frac->mlx_ptr, frac->panel_img_ptr);
+
+        // Create new images
         frac->img_ptr = mlx_new_image(frac->mlx_ptr, frac->width, frac->height);
         frac->panel_img_ptr = mlx_new_image(frac->mlx_ptr, frac->width, frac->panel_height);
-        // Redraw the fractal
+
+        if (!frac->panel_img_ptr)
+            ft_printf("Error: image panel creation failed\n");
+        else
+            ft_printf("Panel image successfully created: %dx%d\n", frac->width, frac->panel_height);
+
+        // Redraw everything
         draw_fractal(frac);
-		mlx_put_image_to_window(frac->mlx_ptr, frac->win_ptr, frac->img_ptr, 0, 0);
-		draw_panel(frac);
+        mlx_put_image_to_window(frac->mlx_ptr, frac->win_ptr, frac->img_ptr, 0, 0);
+        draw_panel(frac);
     }
+
     return (0);
 }
