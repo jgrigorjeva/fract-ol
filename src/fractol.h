@@ -6,7 +6,7 @@
 /*   By: jgrigorj <jgrigorj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 16:00:31 by jgrigorj          #+#    #+#             */
-/*   Updated: 2025/03/10 16:05:44 by jgrigorj         ###   ########.fr       */
+/*   Updated: 2025/03/11 17:29:26 by jgrigorj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ int				handle_input(int keysym, t_frac *frac);
 void			put_pixel_to_img(t_frac *frac, int x, int y, int color);
 void			put_pixel_to_panel(t_frac *frac, int x, int y, int color);
 void			draw_panel(t_frac *frac);
-
+void			print_common_text(t_frac *frac);
+void			print_julia_text(t_frac *frac);
 
 // colors
 unsigned int	float_to_argb(float value, float min, float max, t_frac *frac);
@@ -90,5 +91,8 @@ void			calc_ship(t_frac *frac, int px, int py);
 
 // zooming
 int				mouse_zoom(int mouse_code, int x, int y, t_frac *frac);
+
+// keybord hooks
+int				handle_input(int keysym, t_frac *frac);
 
 #endif

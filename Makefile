@@ -3,7 +3,7 @@ CFLAGS = -Wall -Werror -Wextra -Iminilibx-linux # -Iminilibx-linux tells the com
 
 SRC_DIR = src/
 SRCS = main.c init.c cleanup.c input_reading.c utils.c color.c color2.c calculate_fractal.c \
-		zoom.c panel.c
+		zoom.c panel.c keybord_hooks.c panel_text.c
 
 SRC = $(addprefix $(SRC_DIR), $(SRCS))
 OBJS = $(SRC:.c=.o)

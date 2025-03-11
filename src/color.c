@@ -6,7 +6,7 @@
 /*   By: jgrigorj <jgrigorj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 22:09:37 by jgrigorj          #+#    #+#             */
-/*   Updated: 2025/03/09 22:54:43 by jgrigorj         ###   ########.fr       */
+/*   Updated: 2025/03/11 17:00:02 by jgrigorj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	define_colors(t_color *colors, t_frac *frac)
 		define_col_ocean(colors);
 }
 
-// The pow(normalized, 3) expression changes the distribution from linear to exponential
+// The pow(normalized, 3) expression changes 
+// the distribution from linear to exponential
 t_color	get_gradient_color(float normalized, t_color *colors, t_frac *frac)
 {
 	float	section;

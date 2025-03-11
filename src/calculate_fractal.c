@@ -6,7 +6,7 @@
 /*   By: jgrigorj <jgrigorj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 20:21:07 by jgrigorj          #+#    #+#             */
-/*   Updated: 2025/03/08 00:26:16 by jgrigorj         ###   ########.fr       */
+/*   Updated: 2025/03/11 16:59:00 by jgrigorj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ void	calc_ship(t_frac *frac, int px, int py)
 		y = fabs(2.0 * x * y) + frac->y0;
 		x = x_temp;
 	}
-
 	if (i == frac->max_iter)
 		put_pixel_to_img(frac, px, py, 0xFF000000);
 	else
