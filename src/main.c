@@ -6,7 +6,7 @@
 /*   By: jgrigorj <jgrigorj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 20:44:55 by jgrigorj          #+#    #+#             */
-/*   Updated: 2025/03/11 17:08:41 by jgrigorj         ###   ########.fr       */
+/*   Updated: 2025/03/11 18:03:44 by jgrigorj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	draw_fractal(t_frac *frac)
 	}
 	mlx_put_image_to_window(frac->mlx_ptr, frac->win_ptr, frac->img_ptr, 0, 0);
 	draw_panel(frac);
-	ft_printf("draw\n");
 	return (0);
 }
 
