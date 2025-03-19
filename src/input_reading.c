@@ -6,7 +6,7 @@
 /*   By: jgrigorj <jgrigorj@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 22:29:10 by jgrigorj          #+#    #+#             */
-/*   Updated: 2025/03/10 16:08:55 by jgrigorj         ###   ########.fr       */
+/*   Updated: 2025/03/19 22:09:29 by jgrigorj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	get_jul_cpart(t_frac *frac, char *text, char s)
 {
 	char	*input;
 
-	ft_printf("Enter the %s part Re(c)\n", text);
+	ft_printf("Enter the %s(c)\n", text);
 	input = get_next_line(0);
 	if ((ft_atof(input) == 0 && !(input[0] == '0' || \
 		input[0] == '+' || input[0] == '-')))
@@ -36,9 +36,9 @@ int	get_jul_cpart(t_frac *frac, char *text, char s)
 int	get_julia_param(t_frac *frac)
 {
 	ft_printf("Please, specify the c constant: c = Re(c) + i*Im(c)\n");
-	if (get_jul_cpart(frac, "real", 'r') == 1)
+	if (get_jul_cpart(frac, "real part Re", 'r') == 1)
 		ft_printf("The parameter is invalid, let's try 0.355 instead\n");
-	if (get_jul_cpart(frac, "imaginary", 'i') == 1)
+	if (get_jul_cpart(frac, "imaginary part Im", 'i') == 1)
 		ft_printf("The parameter is invalid, let's try 0.355 instead\n");
 	return (0);
 }
@@ -48,7 +48,7 @@ int	choose_frac(t_frac *frac)
 	char	*input;
 
 	ft_printf("Please, select fractal. Press:\n");
-	ft_printf(" 1 for Julia\n2 for Mandelbrot\n3 for Burning ship\n");
+	ft_printf("1 for Julia\n2 for Mandelbrot\n3 for Burning ship\n");
 	ft_printf("Press any other key to exit\n");
 	input = get_next_line(0);
 	if ((ft_atoi(input) < 1 || ft_atoi(input) > 3))
